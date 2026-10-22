@@ -1,0 +1,24 @@
+# What goes into the release zip, and nothing else. Paths are relative to mod/.
+# `*` matches within one folder, `**` across folders. A pattern that matches no file fails the
+# pack, so a renamed file cannot silently drop out of the release.
+# `source => target` copies a file from the repo root (licenses the LGPL decoder must ship with).
+
+mod_info/stereo_link/info.json
+scripts/stereo_link/modScript.lua
+
+lua/ge/extensions/stereoLink.lua
+lua/ge/extensions/stereoLink/host.lua
+lua/ge/extensions/stereoLink/session.lua
+lua/ge/extensions/stereoLink/mix.lua
+lua/ge/extensions/stereoLink/net.lua
+lua/ge/extensions/stereoLink/preferences.lua
+lua/ge/extensions/stereoLink/sources/*.lua
+lua/ge/extensions/stereoLink/airplay/*.lua
+
+ui/modModules/stereoLink/*.js
+ui/modules/apps/StereoLink/app.js
+ui/modules/apps/StereoLink/app.json
+
+LICENSE => mod_info/stereo_link/LICENSE
+THIRD_PARTY_NOTICES.md => mod_info/stereo_link/THIRD_PARTY_NOTICES.md
+LICENSES/LGPL-2.1.txt => mod_info/stereo_link/LGPL-2.1.txt

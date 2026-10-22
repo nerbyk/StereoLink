@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: luacheck
+        shell: powershell
+        run: ./tools/lint.ps1
+      - name: Pack
+        shell: powershell
+        run: ./tools/pack.ps1
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: lint
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check the tag matches mod_info
+        id: version
+        shell: powershell
+        run: |
+          $version = (Get-Content mod/mod_info/stereo_link/info.json -Raw | ConvertFrom-Json).version_string
+          if ("v$version" -ne "${{ github.ref_name }}") { throw "tag ${{ github.ref_name }} does not match version $version" }
+          "version=$version" >> $env:GITHUB_OUTPUT
+      - name: Pack
+        shell: powershell
+        run: ./tools/pack.ps1
+      - name: Release notes
+        shell: powershell
+        run: |
+          $notes = ./tools/release-notes.ps1 -Version ${{ steps.version.outputs.version }}
+          [IO.File]::WriteAllText("$PWD/dist/notes.md", $notes)
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: StereoLink ${{ steps.version.outputs.version }}
+          body_path: dist/notes.md
+          files: dist/*.zip
+          prerelease: ${{ contains(steps.version.outputs.version, '-') }}

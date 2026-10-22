@@ -1,0 +1,23 @@
+{
+  "domElement": "<stereo-link-app></stereo-link-app>",
+  "appName": "StereoLink",
+  "name": "StereoLink",
+  "types": [
+    "ui.apps.categories.info"
+  ],
+  "description": "Car head unit: music from your phone over AirPlay.",
+  "css": {
+    "right": "16px",
+    "bottom": "240px",
+    "width": "320px",
+    "height": "92px",
+    "min-width": "260px",
+    "min-height": "80px"
+  },
+  "author": "nerbyk",
+  "version": "1",
+  "directive": "stereoLinkApp",
+  "category": "General",
+  "isAuxiliary": false,
+  "interactive": "yes"
+}
