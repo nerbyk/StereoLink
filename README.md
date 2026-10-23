@@ -1,20 +1,25 @@
 # StereoLink for BeamNG.drive
 
-Play music from your iPhone through your car's head unit in BeamNG.drive. Get in, open the
-AirPlay menu on the phone, pick **BeamNG**, and whatever you are listening to plays in the game,
-with the track and cover art on the car's screen.
+![Switching tracks: the car and the phone stay in sync](https://i.imgur.com/owOvGpL.gif)
+
+I wanted my own music in BeamNG the way I have it in my real car: get in, the phone connects,
+drive. All my music is on my phone anyway, so this is just the most convenient way for me. Pick
+**BeamNG** in AirPlay on your iPhone and your music plays through the stereo of the car you are
+driving, with the track and cover art on the car's screen.
 
 No extra software on the PC and nothing to install on the phone. The mod is the AirPlay speaker.
 
-![Switching tracks: the car and the phone stay in sync](docs/images/demo.gif)
+![The head unit](https://i.imgur.com/iEGez4X.jpeg)
 
 ## Features
 
+- Sounds like it is in the car: clear in the cabin, muffled from the chase camera, fading when you
+  walk away. Playing in third person? One checkbox gives you the full sound outside the car.
+- Optionally the music pauses when you stop the engine and plays on when you start it.
 - Works with the AirPlay menu built into iOS, so any app that plays audio works.
 - Compact head unit with title, artist, cover art and progress.
-- Previous / play-pause / next on the screen control the phone.
-- Sounds like a car stereo: clear in the cabin, muffled from the chase camera, quiet when you
-  walk away. Playing in third person? One checkbox gives you the full sound outside the car.
+- Previous / play-pause / next on the screen control the phone. Pause on the phone and it stays
+  connected: play in the car carries on.
 - One volume, the phone's: the screen shows it, and the mouse wheel or `−`/`+` on the screen move
   the phone's slider. The phone's own buttons work as well.
 - The screen shows up only while you are in a car. Drag it anywhere, or minimize it to a small pill.
@@ -27,7 +32,7 @@ No extra software on the PC and nothing to install on the phone. The mod is the 
 - The network set to **Private** in Windows (see below). Guest networks that isolate devices
   will not work.
 
-Android is not supported yet; it is the next thing on the list.
+Android is not supported yet, see [What's next](#whats-next).
 
 ## Install
 
@@ -45,6 +50,8 @@ private, which is the normal setting for a home network.
 *Settings → Network & Internet → Wi-Fi (or Ethernet) → your network → Network profile type →
 Private.*
 
+![Windows setup](https://i.imgur.com/5IMcY73.png)
+
 ## Use
 
 1. Get in any car. The head unit appears at the bottom of the screen.
@@ -52,6 +59,10 @@ Private.*
    **BeamNG**.
 3. Play music. If the screen asks for it, click it once: the game only enables browser sound
    after a click.
+
+![Picking BeamNG in AirPlay](https://i.imgur.com/jifV0tS.png)
+
+![What the screen shows](https://i.imgur.com/r0eInR7.png)
 
 | Action | How |
 |---|---|
@@ -67,6 +78,9 @@ You can also add the screen as a regular UI app: *UI Apps → StereoLink*.
 ### Settings
 
 The gear on the screen opens:
+
+![Settings](https://i.imgur.com/fHXq9LT.png)
+
 
 - **Full sound outside the car**: from the outside cameras the music plays as loud and clear as
   in the cabin, for driving in third person. On foot it stays quiet. Off by default.
@@ -167,6 +181,12 @@ After changing UI files restart the game: reloading the UI in place is unreliabl
 
 Want to add another way to connect a phone, Android in particular? Start with
 [docs/ADDING_A_SOURCE.md](docs/ADDING_A_SOURCE.md).
+
+## What's next
+
+1. Android, if enough people want it.
+2. The song on the car's own dashboard: older cars get a line of text with what is playing, cars
+   with screens get a real media display.
 
 ## Support
 
