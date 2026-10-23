@@ -138,6 +138,13 @@ local function new(deps)
         track.device = info.device
         deps.changed()
       end,
+      -- The phone stopped streaming but still has the head unit selected (paused): keep what is
+      -- shown and the remote, so play on the screen can bring the music back.
+      onStreamEnded = function()
+        if activeSource ~= source then return end
+        lastStream = nil
+        deps.changed()
+      end,
       onVolume = function(volume)
         if not accepts(source, 'volume') then return end
         if restorePending then

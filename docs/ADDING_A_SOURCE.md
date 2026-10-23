@@ -47,6 +47,7 @@ The head unit hands every source a `host` table:
 |---|---|
 | `host.onSession({device = 'Pixel 8'})` | a phone connected (`device` is optional); call it before track info, it marks the head unit connected |
 | `host.onSession(nil, reason)` | it went away |
+| `host.onStreamEnded()` | the phone stopped streaming but keeps the head unit selected (paused): what is shown and the remote stay |
 | `host.toUi(message)` | send something to the player (see below) |
 | `host.onVolume(volume)` | the phone's own volume as its slider position, `0..1` (see "Volume") |
 | `host.onTrack({title, artist, album})` | track info |

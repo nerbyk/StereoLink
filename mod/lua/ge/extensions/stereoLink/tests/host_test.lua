@@ -400,4 +400,33 @@ function cases.everySessionRestoresOnce()
   t.eq(table.concat(b.volumes, ","), "0.8,0.8")
 end
 
+function cases.aPausedPhoneStaysConnected()
+  local rig = newRig()
+  local b = fakeSource("b", true)
+  local host = rig.host.hostFor(b)
+  host.toUi(stream(1))
+  host.onSession({})
+  host.onTrack({ title = "Song", artist = "Band" })
+  host.toUi({ type = "teardown" }) -- iOS ends the stream on pause
+  host.onStreamEnded()
+  local state = rig.host.state()
+  t.eq(state.connected, true, "the phone still has the head unit selected")
+  t.eq(state.title, "Song")
+  rig.host.control("playpause")
+  t.eq(table.concat(b.controls, ","), "playpause", "play goes to the phone")
+  host.onSession(nil, "paused too long")
+  t.eq(rig.host.state().connected, false)
+end
+
+function cases.aPausedPhoneDoesNotResendItsOldStream()
+  local rig = newRig()
+  local host = rig.host.hostFor(fakeSource("b", true))
+  host.toUi(stream(1))
+  host.onSession({})
+  host.onStreamEnded()
+  rig.sent = {}
+  rig.host.replay()
+  t.eq(sentTypes(rig), "volume", "a reloaded UI gets no stream that has ended")
+end
+
 return cases

@@ -2,6 +2,7 @@
 
 local M = {}
 
+local socket = require('socket')
 local mdns = require('stereoLink/airplay/mdns')
 local raop = require('stereoLink/airplay/raop')
 local remote = require('stereoLink/airplay/remote')
@@ -10,6 +11,7 @@ local volume = require('stereoLink/airplay/volume')
 local BASE_PORT = 47000
 local SAMPLE_RATE = 44100
 local RTP_TIMESTAMP_WRAP = 2 ^ 32
+local STANDBY_TIME = 10 * 60 -- a phone paused longer than this is taken as gone
 
 M.id = 'airplay'
 M.label = 'AirPlay'
@@ -19,6 +21,7 @@ local options
 local running = false
 local port
 local volumeDb = volume.toDb(volume.INITIAL_VOLUME) -- what GET_PARAMETER answers: the phone's report or the game's change
+local standbyUntil -- set while the phone is paused: iOS ends the stream on pause and keeps the speaker
 
 -- Progress comes as RTP timestamps (start/current/end), which wrap around at 2^32.
 local function progressSeconds(first, current, last)
@@ -46,16 +49,26 @@ local function macBytes(hex)
   return table.concat(bytes)
 end
 
+local function endStandby(reason)
+  standbyUntil = nil
+  remote.clear()
+  host.onSession(nil, reason)
+end
+
 local raopEvents = {
   toUi = function(message) host.toUi(message) end,
   getVolumeDb = function() return volumeDb end,
   onSession = function(session, reason)
     if session then
+      standbyUntil = nil
       remote.setTarget(session.peerIp, session.dacpId, session.activeRemote)
       host.onSession({})
+    elseif reason == 'teardown' then
+      -- iOS sends TEARDOWN when the music is paused; the phone still has us selected
+      standbyUntil = socket.gettime() + STANDBY_TIME
+      host.onStreamEnded()
     else
-      remote.clear()
-      host.onSession(nil, reason)
+      endStandby(reason)
     end
   end,
   onVolume = function(db)
@@ -90,6 +103,7 @@ local function start(hostCallbacks, opts)
 end
 
 local function stop()
+  standbyUntil = nil
   raop.stop()
   mdns.stop()
   remote.clear()
@@ -101,6 +115,7 @@ local function update()
   mdns.update()
   raop.update()
   remote.update()
+  if standbyUntil and socket.gettime() > standbyUntil then endStandby('paused too long') end
 end
 
 -- value: the slider position, 0..1. The phone confirms with its own report.
