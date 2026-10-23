@@ -136,11 +136,6 @@ end
 ---------------------------------------------------------------------------
 -- state for the head unit screen
 
-local function language()
-  local ok, lang = pcall(function() return Lua:getSelectedLanguage() end)
-  return ok and type(lang) == 'string' and lang:sub(1, 2):lower() or 'en'
-end
-
 local function sawNetwork()
   for _, source in ipairs(SOURCES) do
     if source.status().sawNetwork then return true end
@@ -161,7 +156,6 @@ local function buildState()
   state.running = running
   state.error = startError
   state.name = prefs.name
-  state.language = language()
   state.carVolume = prefs.carVolume
   state.options = preferences.options(prefs)
   state.inVehicle = not isOnFoot(getPlayerVehicle(0))

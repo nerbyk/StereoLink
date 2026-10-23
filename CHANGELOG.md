@@ -14,4 +14,3 @@ First public release.
 - Settings behind a gear on the screen: "Full sound outside the car" for playing in third person,
   and the overall volume of the mod.
 - The screen appears while you sit in a car, can be dragged anywhere and minimized.
-- English and Russian, following the game language.

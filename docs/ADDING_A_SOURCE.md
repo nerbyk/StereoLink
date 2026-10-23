@@ -14,7 +14,7 @@ mod/lua/ge/extensions/stereoLink/airplay/     AirPlay internals (dns, mdns, rtsp
 mod/lua/ge/extensions/stereoLink/net.lua      local address helpers shared by sources
 mod/ui/modModules/stereoLink/player.js        decoding and Web Audio playback
 mod/ui/modModules/stereoLink/airplay.js       AirPlay requests the UI answers (RSA work)
-mod/ui/modModules/stereoLink/i18n.js          connect hints, `hint_<source id>`
+mod/ui/modModules/stereoLink/strings.js       screen texts; connect hints are `hint_<source id>`
 ```
 
 A new source gets `sources/<name>.lua` plus, if it needs more than a couple of hundred lines,
@@ -108,7 +108,7 @@ On the UI side requests are a table in `stereoLink.js` (`requests[type]`: what t
 answer if it throws); AirPlay's live in `airplay.js`. A new kind of request is one entry there.
 
 The connect hint on the idle screen comes from `state.sources`: one line per running source,
-text from the i18n key `hint_<id>` (falls back to the source's `label`).
+text from the strings.js key `hint_<id>` (falls back to the source's `label`).
 
 ## What the game allows
 

@@ -1,7 +1,7 @@
 // The head unit: a compact screen shown over the HUD while you sit in a car (and inside the
 // optional "StereoLink" UI app). Drag it anywhere; the mouse wheel over it sets the phone volume.
 
-import { translate } from './i18n.js'
+import { text } from './strings.js'
 
 const svg = path => `<svg viewBox="0 0 24 24" aria-hidden="true">${path}</svg>`
 
@@ -189,7 +189,7 @@ const PILL = `
 </div>`
 
 // The checkboxes of the settings panel: an option key from Lua's preferences.lua (OPTIONS) and
-// the i18n.js key of its label. A new option is one entry here.
+// the strings.js key of its label. A new option is one entry here.
 const SETTINGS = [
   { key: 'fullSoundOutside', label: 'fullSoundOutside' },
 ]
@@ -263,7 +263,7 @@ function registerHeadUnit(module, multimedia) {
       }
       element[0].addEventListener('wheel', onWheel, { passive: false })
 
-      scope.t = (key, params) => translate(scope.s.language, key, params)
+      scope.t = text
       scope.noNetwork = () => !scope.s.sawNetwork && Date.now() - shownAt > NETWORK_GRACE_MS
       // Lua ships in the same package and lists the running sources whenever it is on
       scope.sources = () => Array.isArray(scope.s.sources) ? scope.s.sources : [] // an empty Lua table arrives as {}
@@ -346,8 +346,8 @@ function registerHeadUnit(module, multimedia) {
       }
       scope.pillText = () => {
         const s = scope.s
-        if (s.connected) return (s.title || translate(s.language, 'fromPhone')) + (s.artist ? ' — ' + s.artist : '')
-        return s.power ? s.name : translate(s.language, 'pillOff')
+        if (s.connected) return (s.title || text('fromPhone')) + (s.artist ? ' — ' + s.artist : '')
+        return s.power ? s.name : text('pillOff')
       }
 
       // dragging; presses on buttons are left alone, and a drag never counts as a click

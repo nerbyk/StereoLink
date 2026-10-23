@@ -88,7 +88,7 @@ drops the backlog so the delay stays the same.
 | `ui/modModules/stereoLink/airplay.js` | AirPlay requests the UI answers: challenge signature, AES key |
 | `ui/modModules/stereoLink/alac.js` | Apple Lossless decoder (LGPL, from FFmpeg) |
 | `ui/modModules/stereoLink/headUnit.js` | the on-screen head unit |
-| `ui/modModules/stereoLink/i18n.js` | English and Russian strings |
+| `ui/modModules/stereoLink/strings.js` | the texts on the screen |
 | `ui/modModules/stereoLink/tests/run.js` | UI tests (decoder, crypto, player) |
 | `ui/modules/apps/StereoLink/` | optional UI app with the same screen |
 
@@ -99,4 +99,4 @@ sound like the cabin) and `mac` (a random id generated on first start).
 The settings panel changes options through one call, `stereoLink.uiSetOption(key, value)`.
 `preferences.lua` lists the options with their type and default (`OPTIONS`); anything else is
 refused, and the state sends their values to the screen as `options`. A new checkbox is an entry
-in `OPTIONS`, one in `SETTINGS` in `headUnit.js` and its label in `i18n.js`.
+in `OPTIONS`, one in `SETTINGS` in `headUnit.js` and its label in `strings.js`.

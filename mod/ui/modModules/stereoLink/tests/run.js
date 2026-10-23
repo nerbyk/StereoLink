@@ -8,7 +8,7 @@ import { AlacDecoder } from '../alac.js'
 import { Player } from '../player.js'
 import { streamKeys } from '../airplay.js'
 import { coverBackground, SETTINGS } from '../headUnit.js'
-import { translate } from '../i18n.js'
+import { text } from '../strings.js'
 
 const cases = {}
 const SKIPPED = Symbol('skipped')
@@ -408,17 +408,15 @@ cases.playerStoppedWhileStartingStaysStopped = async () => {
   assertEqual(player.stream, null, 'no stream')
 }
 
-cases.translateFallsBackToEnglish = () => {
-  assertEqual(translate('de', 'connectPhone'), 'Connect your phone')
-  assertEqual(translate('ru', 'hint_airplay', { name: 'Car' }), 'iPhone: Пункт управления → AirPlay → «Car»')
+cases.textFillsInItsParameters = () => {
+  assertEqual(text('hint_airplay', { name: 'Car' }), 'iPhone: Control Center → AirPlay → “Car”')
+  assertEqual(text('noSuchKey'), 'noSuchKey', 'a missing string shows its key')
 }
 
-// a missing English string shows the key; a missing Russian one falls back to English
-cases.everySettingHasALabelInBothLanguages = () => {
+// a missing string shows the key on the screen
+cases.everySettingHasALabel = () => {
   for (const setting of SETTINGS) {
-    const english = translate('en', setting.label)
-    assertEqual(english !== setting.label, true, `${setting.key} in English`)
-    assertEqual(translate('ru', setting.label) !== english, true, `${setting.key} in Russian`)
+    assertEqual(text(setting.label) !== setting.label, true, setting.key)
   }
 }
 

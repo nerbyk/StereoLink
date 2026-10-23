@@ -6,8 +6,6 @@ with the track and cover art on the car's screen.
 
 No extra software on the PC and nothing to install on the phone. The mod is the AirPlay speaker.
 
-[Русская версия](README.ru.md)
-
 ![Switching tracks: the car and the phone stay in sync](docs/images/demo.gif)
 
 ## Features
@@ -20,7 +18,6 @@ No extra software on the PC and nothing to install on the phone. The mod is the 
 - One volume, the phone's: the screen shows it, and the mouse wheel or `−`/`+` on the screen move
   the phone's slider. The phone's own buttons work as well.
 - The screen shows up only while you are in a car. Drag it anywhere, or minimize it to a small pill.
-- English and Russian, following the game language.
 
 ## Requirements
 
