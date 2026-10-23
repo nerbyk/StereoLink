@@ -165,6 +165,12 @@ After changing UI files restart the game: reloading the UI in place is unreliabl
 Want to add another way to connect a phone, Android in particular? Start with
 [docs/ADDING_A_SOURCE.md](docs/ADDING_A_SOURCE.md).
 
+## Support
+
+StereoLink is free. If you like it, you can
+[buy me a beer 🍺](https://link.payoneer.com/Token?t=D5DF90D2253E4AFAAD4090E163102564&src=pl)
+(or a coffee). Any amount, no strings attached.
+
 ## License
 
 MIT, see [LICENSE](LICENSE). The ALAC decoder is a port of FFmpeg and stays under the LGPL 2.1+;
