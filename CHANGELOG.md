@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.0
+
+- Pausing on the phone no longer disconnects it: the track stays on the screen and play in the
+  car starts the music again.
+- New setting "Pause the music when the engine is off": stopping the engine pauses the phone,
+  starting it plays on. A pause you made yourself stays. Off by default.
+- The settings panel fits both options without scrolling.
+
 ## 1.0.0
 
 First public release.
