@@ -21,6 +21,7 @@ const STRINGS = {
   settings: 'Settings',
   back: 'Back',
   fullSoundOutside: 'Full sound outside the car', // SETTINGS in headUnit.js
+  pauseWithEngine: 'Pause the music when the engine is off',
   modVolume: 'Overall volume',
   unlock: 'Click to turn the sound on',
   pillOff: 'off',

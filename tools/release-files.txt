@@ -10,6 +10,7 @@ lua/ge/extensions/stereoLink.lua
 lua/ge/extensions/stereoLink/host.lua
 lua/ge/extensions/stereoLink/session.lua
 lua/ge/extensions/stereoLink/mix.lua
+lua/ge/extensions/stereoLink/ignition.lua
 lua/ge/extensions/stereoLink/net.lua
 lua/ge/extensions/stereoLink/preferences.lua
 lua/ge/extensions/stereoLink/sources/*.lua

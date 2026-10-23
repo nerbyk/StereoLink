@@ -8,7 +8,7 @@ unused_args = false
 read_globals = {
   "log", "guihooks", "extensions", "setExtensionUnloadMode", "settings", "Lua", "FS",
   "getPlayerVehicle", "jsonWriteFile", "readFile", "writeFile",
-  "core_camera",
+  "core_camera", "core_vehicleBridge",
   "stereoLink", "stereoLink_testRunner", "stereoLink_dev_fakeSender",
 }
 

@@ -70,6 +70,8 @@ The gear on the screen opens:
 
 - **Full sound outside the car**: from the outside cameras the music plays as loud and clear as
   in the cabin, for driving in third person. On foot it stays quiet. Off by default.
+- **Pause the music when the engine is off**: stopping the engine pauses the phone, starting it
+  plays on. A pause you made yourself stays. Off by default.
 - **Overall volume**: the mod's own level, on top of the game's master volume.
 
 Everything is stored in
@@ -80,6 +82,7 @@ Everything is stored in
 | `name` | the name shown in the AirPlay menu (default `BeamNG`) |
 | `carVolume` | overall level of the mod's sound, `0`–`1` (the screen sets the phone volume) |
 | `fullSoundOutside` | full sound outside the car, `true` / `false` (default `false`) |
+| `pauseWithEngine` | pause the music when the engine is off, `true` / `false` (default `false`) |
 | `power` | whether the receiver starts with the game |
 | `mac` | random id of this receiver, generated on first start |
 

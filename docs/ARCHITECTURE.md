@@ -69,6 +69,7 @@ drops the backlog so the delay stays the same.
 | `stereoLink/host.lua` | the host table sources get: who owns the player, what it plays, pause detection (pure, engine parts passed in) |
 | `stereoLink/session.lua` | routing rule (capture/deliver/drop) and track position maths (pure) |
 | `stereoLink/mix.lua` | how loud and muffled the music is in the cabin, from outside and on foot (pure) |
+| `stereoLink/ignition.lua` | when the engine stopping or starting presses play/pause on the phone (pure) |
 | `stereoLink/sources/airplay.lua` | AirPlay as a source (see ADDING_A_SOURCE.md) |
 | `stereoLink/airplay/dns.lua` | DNS packets (pure) |
 | `stereoLink/airplay/mdns.lua` | responder and SRV lookups (sockets) |
@@ -94,7 +95,7 @@ drops the backlog so the delay stays the same.
 
 Settings are stored in `<user folder>/settings/stereoLink.json`: `name` (what the phone
 shows), `power`, `carVolume` (the mod's overall level), `fullSoundOutside` (outside cameras
-sound like the cabin) and `mac` (a random id generated on first start).
+sound like the cabin), `pauseWithEngine` (play/pause follows the engine) and `mac` (a random id generated on first start).
 
 The settings panel changes options through one call, `stereoLink.uiSetOption(key, value)`.
 `preferences.lua` lists the options with their type and default (`OPTIONS`); anything else is

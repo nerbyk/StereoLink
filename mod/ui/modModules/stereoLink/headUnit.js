@@ -56,20 +56,20 @@ const STYLE = `
   .sl-corner { position: absolute; top: 4px; right: 4px; display: flex; gap: 1px; }
   .sl-corner .sl-button { height: 20px; width: 20px; padding: 3px; color: #8b92a3; }
   .sl-corner .sl-button.on { color: #4cd964; }
-  .sl-settings { position: relative; height: 100%; display: flex; flex-direction: column; padding: 4px 10px 6px 6px; box-sizing: border-box; }
-  .sl-settings-head { flex: none; height: 22px; display: flex; align-items: center; gap: 4px; padding-right: 64px; }
+  .sl-settings { position: relative; height: 100%; display: flex; flex-direction: column; padding: 3px 10px 4px 6px; box-sizing: border-box; }
+  .sl-settings-head { flex: none; height: 18px; display: flex; align-items: center; gap: 4px; padding-right: 64px; }
   .sl-settings-title { font-size: 12.5px; font-weight: 700; }
-  .sl-settings-list { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 3px; padding-left: 4px; }
+  .sl-settings-list { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 2px; padding-left: 4px; }
   .sl-settings-list > :first-child { margin-top: auto; }
   .sl-settings-list > :last-child { margin-bottom: auto; }
   .sl-option { flex: none; border: 0; background: transparent; color: #f2f4f8; font: inherit; font-size: 11.5px; cursor: pointer;
-    display: flex; align-items: center; gap: 8px; height: 22px; padding: 0 6px; border-radius: 7px; text-align: left; }
+    display: flex; align-items: center; gap: 8px; height: 18px; padding: 0 6px; border-radius: 6px; text-align: left; }
   .sl-option:hover { background: rgba(255,255,255,.08); }
-  .sl-check { width: 14px; height: 14px; flex: none; box-sizing: border-box; padding: 1px; border-radius: 4px;
+  .sl-check { width: 13px; height: 13px; flex: none; box-sizing: border-box; padding: 1px; border-radius: 4px;
     box-shadow: inset 0 0 0 1.5px #8b92a3; color: transparent; }
   .sl-check.on { background: #4cd964; box-shadow: none; color: #0c0d11; }
   .sl-check .sl-glyph { display: block; width: 100%; height: 100%; }
-  .sl-level { flex: none; display: flex; align-items: center; gap: 2px; height: 24px; padding: 0 0 0 6px; font-size: 11.5px; }
+  .sl-level { flex: none; display: flex; align-items: center; gap: 2px; height: 20px; padding: 0 0 0 6px; font-size: 11.5px; }
   .sl-level-label { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .sl-level-value { min-width: 36px; text-align: center; font-size: 11px; color: #c0c6d3; }
   .sl-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(255,255,255,.08); }
@@ -192,6 +192,7 @@ const PILL = `
 // the strings.js key of its label. A new option is one entry here.
 const SETTINGS = [
   { key: 'fullSoundOutside', label: 'fullSoundOutside' },
+  { key: 'pauseWithEngine', label: 'pauseWithEngine' },
 ]
 
 const WIDTH = 320

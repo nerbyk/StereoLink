@@ -8,6 +8,7 @@ local socket = require('socket')
 local preferences = require('stereoLink/preferences')
 local hostModule = require('stereoLink/host')
 local mix = require('stereoLink/mix')
+local ignition = require('stereoLink/ignition')
 
 local SOURCES = {
   require('stereoLink/sources/airplay'),
@@ -27,6 +28,9 @@ local outbox = {}
 local stateDirty = true
 local lastStateAt = 0
 local lastAmbientAt = 0
+local ignitionState = {}
+local engineWatched = {} -- vehicle id -> true once the vehicle reports engineRunning changes
+local engineFirstReply = {} -- vehicle id -> engineRunning before the first change was reported
 
 ---------------------------------------------------------------------------
 -- settings file
@@ -176,11 +180,44 @@ local function flushOutbox()
   outbox = {}
 end
 
+-- Whether the engine of this vehicle runs, nil until its own Lua has said so. The vehicle Lua
+-- runs apart from this one, so the answer comes back later and is cached by core_vehicleBridge.
+local function engineOn(vehicle)
+  if not core_vehicleBridge then return nil end
+  local id = vehicle:getId()
+  if not engineWatched[id] then
+    engineWatched[id] = true
+    core_vehicleBridge.registerValueChangeNotification(vehicle, 'engineRunning')
+    core_vehicleBridge.requestValue(vehicle, function(reply)
+      if reply and reply.result ~= nil then engineFirstReply[id] = reply.result end
+    end, 'electricsValue', 'engineRunning')
+  end
+  local value = tonumber(core_vehicleBridge.getCachedVehicleData(id, 'engineRunning') or engineFirstReply[id])
+  if value == nil then return nil end
+  return value > 0
+end
+
+-- "Pause when the engine is off": presses play/pause on the phone as the engine stops and starts.
+local function followEngine(now)
+  if not prefs.pauseWithEngine then
+    ignitionState = {}
+    return
+  end
+  local vehicle = getPlayerVehicle(0)
+  local id, on
+  if not isOnFoot(vehicle) then id, on = vehicle:getId(), engineOn(vehicle) end
+  local state = host.state()
+  local action
+  ignitionState, action = ignition.decide(ignitionState, id, on, state.playing, now)
+  if action and state.connected then host.control('playpause') end
+end
+
 local function sendAmbient(now)
   if now - lastAmbientAt <= AMBIENT_INTERVAL then return end
   lastAmbientAt = now
   local level, muffle = ambient()
   send({ type = 'ambient', level = level, muffle = muffle })
+  followEngine(now)
 end
 
 ---------------------------------------------------------------------------

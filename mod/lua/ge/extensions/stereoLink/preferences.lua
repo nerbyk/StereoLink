@@ -13,6 +13,7 @@ local MAX_NAME_BYTES = 40 -- the advertised name ends up inside a 63 byte DNS la
 -- The panel lists its checkboxes in ui/modModules/stereoLink/headUnit.js (SETTINGS).
 local OPTIONS = {
   fullSoundOutside = { type = 'boolean', default = false },
+  pauseWithEngine = { type = 'boolean', default = false },
 }
 
 -- UTF-8 continuation bytes look like 10xxxxxx; a cut must not land in front of one.
