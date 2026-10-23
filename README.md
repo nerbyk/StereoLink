@@ -171,7 +171,7 @@ Want to add another way to connect a phone, Android in particular? Start with
 ## Support
 
 StereoLink is free. If you like it, you can
-[buy me a beer 🍺](https://link.payoneer.com/Token?t=D5DF90D2253E4AFAAD4090E163102564&src=pl)
+[buy me a beer 🍺](https://link.payoneer.com/Token?t=814942C193C2433E8EECA80E0735BECD&src=pl)
 (or a coffee). Any amount, no strings attached.
 
 ## License
