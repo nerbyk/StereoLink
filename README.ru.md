@@ -8,7 +8,7 @@
 
 [English version](README.md)
 
-<!-- скриншоты: docs/images/head-unit.png, docs/images/airplay-menu.png -->
+![Переключение треков: машина и телефон синхронно](docs/images/demo.gif)
 
 ## Что умеет
 

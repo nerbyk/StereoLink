@@ -8,7 +8,7 @@ No extra software on the PC and nothing to install on the phone. The mod is the 
 
 [Русская версия](README.ru.md)
 
-<!-- screenshots: docs/images/head-unit.png, docs/images/airplay-menu.png -->
+![Switching tracks: the car and the phone stay in sync](docs/images/demo.gif)
 
 ## Features
 
