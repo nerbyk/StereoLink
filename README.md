@@ -1,138 +1,75 @@
-# StereoLink for BeamNG.drive
+# StereoLink
+
+An AirPlay 1 (RAOP) audio receiver that runs inside BeamNG.drive, written in the game's Lua and
+its UI JavaScript. An iPhone streams to it like to any AirPlay speaker; the game plays the music
+through the car's stereo, with track info, artwork and remote control on an in-game head unit.
+
+Nothing runs outside the game: no helper process, no native code, no extra install on the PC or
+the phone. Players download it from the BeamNG repository; this repo is the source.
 
 ![Switching tracks: the car and the phone stay in sync](https://i.imgur.com/owOvGpL.gif)
 
-I wanted my own music in BeamNG the way I have it in my real car: get in, the phone connects,
-drive. All my music is on my phone anyway, so this is just the most convenient way for me. Pick
-**BeamNG** in AirPlay on your iPhone and your music plays through the stereo of the car you are
-driving, with the track and cover art on the car's screen.
-
-No extra software on the PC and nothing to install on the phone. The mod is the AirPlay speaker.
-
-![The head unit](https://i.imgur.com/iEGez4X.jpeg)
-
-## Features
-
-- Sounds like it is in the car: clear in the cabin, muffled from the chase camera, fading when you
-  walk away. Playing in third person? One checkbox gives you the full sound outside the car.
-- Optionally the music pauses when you stop the engine and plays on when you start it.
-- Works with the AirPlay menu built into iOS, so any app that plays audio works.
-- Compact head unit with title, artist, cover art and progress.
-- Previous / play-pause / next on the screen control the phone. Pause on the phone and it stays
-  connected: play in the car carries on.
-- One volume, the phone's: the screen shows it, and the mouse wheel or `−`/`+` on the screen move
-  the phone's slider. The phone's own buttons work as well.
-- The screen shows up only while you are in a car. Drag it anywhere, or minimize it to a small pill.
-
-## Requirements
-
-- BeamNG.drive 0.40 on Windows (tested on 0.40.3).
-- An iPhone or iPad on the **same Wi-Fi network** as the PC. The PC itself
-  can be on a cable.
-- The network set to **Private** in Windows (see below). Guest networks that isolate devices
-  will not work.
-
-Android is not supported yet, see [What's next](#whats-next).
-
-## Install
-
-1. Download `stereo_link_<version>.zip` from [Releases](../../releases).
-2. Put the zip, without unpacking it, into
-   `%LOCALAPPDATA%\BeamNG\BeamNG.drive\current\mods`.
-3. Start the game. The first time, Windows may ask whether BeamNG.drive can use the network:
-   allow it on **private networks**.
-
-### Make your Wi-Fi a private network
-
-Windows only lets games accept connections from the local network when it is marked as
-private, which is the normal setting for a home network.
-
-*Settings → Network & Internet → Wi-Fi (or Ethernet) → your network → Network profile type →
-Private.*
-
-![Windows setup](https://i.imgur.com/5IMcY73.png)
-
-## Use
-
-1. Get in any car. The head unit appears at the bottom of the screen.
-2. On the iPhone open **Control Center**, tap the **AirPlay** icon on the music tile and choose
-   **BeamNG**.
-3. Play music. If the screen asks for it, click it once: the game only enables browser sound
-   after a click.
-
-![Picking BeamNG in AirPlay](https://i.imgur.com/jifV0tS.png)
-
-![What the screen shows](https://i.imgur.com/r0eInR7.png)
-
-| Action | How |
-|---|---|
-| Previous / pause / next | buttons on the screen |
-| Volume | `−` / `+` next to the number, or the mouse wheel over the screen; the phone's slider follows |
-| Move the screen | drag it |
-| Minimize / restore | the `–` button / click the pill |
-| Turn the receiver off | the power button |
-| Settings | the gear button; the arrow brings the player back |
-
-You can also add the screen as a regular UI app: *UI Apps → StereoLink*.
-
-### Settings
-
-The gear on the screen opens:
-
-![Settings](https://i.imgur.com/fHXq9LT.png)
-
-
-- **Full sound outside the car**: from the outside cameras the music plays as loud and clear as
-  in the cabin, for driving in third person. On foot it stays quiet. Off by default.
-- **Pause the music when the engine is off**: stopping the engine pauses the phone, starting it
-  plays on. A pause you made yourself stays. Off by default.
-- **Overall volume**: the mod's own level, on top of the game's master volume.
-
-Everything is stored in
-`%LOCALAPPDATA%\BeamNG\BeamNG.drive\current\settings\stereoLink.json`:
-
-| Key | Meaning |
-|---|---|
-| `name` | the name shown in the AirPlay menu (default `BeamNG`) |
-| `carVolume` | overall level of the mod's sound, `0`–`1` (the screen sets the phone volume) |
-| `fullSoundOutside` | full sound outside the car, `true` / `false` (default `false`) |
-| `pauseWithEngine` | pause the music when the engine is off, `true` / `false` (default `false`) |
-| `power` | whether the receiver starts with the game |
-| `mac` | random id of this receiver, generated on first start |
-
-Edit the file only with the game closed; the screen saves its settings itself.
-
-## Troubleshooting
-
-**"BeamNG" does not show up in the AirPlay menu.**
-Check that the phone and the PC are on the same network and that Windows calls it Private. Close
-the AirPlay menu and open it again: the phone looks for speakers right when the menu opens. If the
-head unit says that it sees no phones, Windows is still blocking the game: look for
-*BeamNG.drive* in *Windows Defender Firewall → Allow an app through firewall* and tick **Private**.
-A VPN on the phone or the PC can also hide the two from each other.
-
-**Connected, but no sound.**
-Click the head unit once. Check the in-game master volume and the volume on the screen: at 0 the
-phone is muted.
-
-**The sound stutters.**
-Usually weak Wi-Fi on the phone's side. Moving closer to the router helps; 5 GHz is better than
-2.4 GHz.
-
-**The music stops when I alt-tab.**
-The game pauses its interface while it is minimized. Keep it in the foreground or windowed.
-
-**The previous / pause / next buttons do nothing.**
-The first press after connecting can take a second while the game finds the phone's remote
-control. If they never react, the phone did not share it: use the controls on the phone. The
-volume on the screen still works then, but only in the game; the phone's slider stays put.
-
 ## How it works
 
-BeamNG lets mod Lua open network sockets but not play raw audio; its interface browser can play
-audio but cannot open sockets. So the Lua side implements the AirPlay receiver (discovery,
-RTSP, RTP) and passes the encrypted packets to the browser, which decrypts them, decodes Apple
-Lossless and plays them through Web Audio. Details in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+BeamNG gives mods two sandboxes, and each can do only half of an AirPlay receiver:
+
+| | Can | Cannot |
+|---|---|---|
+| GE Lua (LuaJIT) | TCP/UDP sockets via LuaSocket, to private LAN addresses only | multicast sends, processes, FFI, big-integer maths, raw audio out |
+| UI (CEF / Chromium) | WebCrypto, BigInt, Web Audio | sockets, Web Workers |
+
+So Lua is the network card and the browser is the sound card:
+
+```
+ iPhone ──Wi-Fi──▶  GE Lua                                     UI (CEF)
+  mDNS (UDP 5353)   airplay/mdns   unicast answers
+  RTSP (TCP 47000)  airplay/raop ──challenge──────────────────▶ crypto.js   RSA sign (AirPort key)
+                                 ◀──uiReply────────────────────
+                                 ──stream (AES key, fmtp)─────▶ airplay.js  RSA-OAEP unwrap
+  RTP  (UDP 47001+)              ──audio packets─────────────▶ player.js   reorder, AES-128-CBC,
+                                                                alac.js     ALAC decode, Web Audio
+  DACP (HTTP)       airplay/remote ◀──play/pause/next/volume─── headUnit.js the screen
+```
+
+| Layer | What the mod does |
+|---|---|
+| Discovery | mDNS responder for `_raop._tcp`. Multicast sends are blocked in the sandbox, so it answers iOS's unicast-response (QU) queries by unicast |
+| Session | RTSP: `OPTIONS` + Apple-Challenge, `ANNOUNCE` (SDP, RSA-wrapped AES key), `SETUP`, `RECORD`, `FLUSH`, `SET_PARAMETER` (volume, DMAP track info, artwork, progress), `TEARDOWN` |
+| Audio | RTP, 352-frame ALAC packets, AES-128-CBC; gaps re-requested over the control port; ~0.35 s jitter buffer |
+| Remote | DACP over HTTP with the `Active-Remote` token. The port is found by a legacy-unicast SRV query; volume is sent as `volumeup`/`volumedown` presses because iOS acknowledges `dmcp.device-volume` and ignores it |
+| Decode | ALAC ported from FFmpeg (LGPL), bit-exact against the FLAC reference |
+| Mix | gain and low-pass by camera: cabin, chase camera, on foot; optional pause with the engine (`engineRunning` via `core_vehicleBridge`) |
+
+Details, the message protocol between Lua and the UI and the file map:
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Adding a source (Android is next):
+[docs/ADDING_A_SOURCE.md](docs/ADDING_A_SOURCE.md).
+
+### Untrusted input
+
+Anything on the LAN can talk to the receiver, so the parsers are bounded: RTSP head and body
+size, DMAP depth and length, `fmtp` ranges, DNS question count and pointer budget, one
+Apple-Challenge per connection. `SETUP` is only accepted from the client that sent `ANNOUNCE`.
+`stereoLink_dev_fakeSender.selfCheck()` replays these cases against a running receiver.
+
+## Network
+
+- BeamNG.drive 0.40 on Windows (tested on 0.40.3). The phone and the PC on one LAN; the PC may be
+  wired.
+- Windows has to call that network **Private**: BeamNG's firewall rule only allows private
+  networks. Guest networks with client isolation will not work.
+- Ports: UDP 5353 (mDNS, shared), TCP 47000 (RTSP; falls back to 47010, 47020, … and finally an
+  ephemeral port), UDP on the next three ports for RTP audio, control and timing (any free port if
+  taken), outbound TCP to the phone's DACP port.
+
+## Repository layout
+
+```
+mod/                    the mod as the game loads it
+  lua/ge/extensions/    stereoLink.lua and stereoLink/ (sources, airplay, pure modules, tests)
+  ui/modModules/        stereoLink/ (player, decoder, crypto, head unit, tests)
+docs/                   architecture, adding a source
+tools/                  link, lint, pack, release, fixtures (PowerShell)
+```
 
 ## Development
 
@@ -140,59 +77,52 @@ Requires Windows PowerShell and the game. `make` is optional (`winget install ez
 each target runs the script next to it.
 
 ```powershell
-make link       # tools/link.ps1: junction mods/unpacked/stereo_link -> this repo's mod/
-make lint       # tools/lint.ps1: luacheck (downloads luacheck 1.2.0 into tools/bin on first run)
-make fixtures   # tools/fetch-fixtures.ps1: reference audio for the decoder test
-make pack       # tools/pack.ps1: dist/stereo_link_<version>.zip
+make link       # junction <user>/mods/unpacked/stereo_link -> this repo's mod/
+make lint       # luacheck (downloads luacheck 1.2.0 into tools/bin on first run)
+make fixtures   # reference audio for the decoder test
+make pack       # dist/stereo_link_<version>.zip from tools/release-files.txt
 ```
 
-The release zip holds exactly the files listed in `tools/release-files.txt`; a new Lua or JS
-file has to be added there, and `make pack` lists everything it left out.
+### Tests
 
-To release, add a `## x.y.z` section to `CHANGELOG.md`, commit it on `main`, then
-`make release VERSION=x.y.z`. That sets the version in `info.json`, commits, tags `vx.y.z` and
-pushes; GitHub Actions builds the zip and publishes the release with the changelog section as its
-text. A version like `1.1.0-beta.1` becomes a pre-release.
-
-Tests run inside the game. From the in-game Lua console:
+Both suites run inside the game. Lua, from the in-game console:
 
 ```lua
 extensions.load("stereoLink_testRunner"); print(stereoLink_testRunner.runAll())
 ```
 
-and from the UI's developer console (or any tool that evaluates JS in the game UI):
+JS, from the UI developer console:
 
 ```js
 import(location.origin + '/ui/modModules/stereoLink/tests/run.js').then(m => m.runAll()).then(console.log)
 ```
 
-To see what the mod thinks is going on, run `dump(stereoLink.debugState())` in the Lua
-console; the player's side (queue, lost and late packets, errors) is `StereoLink.diagnostics()`
-in the UI console.
-
-No phone at hand? `stereoLink_dev_fakeSender` streams a test tone through the whole AirPlay
-path:
+Without a phone, `stereoLink_dev_fakeSender` streams a test tone through the whole AirPlay path:
 
 ```lua
 extensions.load("stereoLink_dev_fakeSender"); stereoLink_dev_fakeSender.play(5)
 ```
 
+State and diagnostics: `dump(stereoLink.debugState())` in Lua, `StereoLink.diagnostics()` in the
+UI (queue length, lost and late packets, decode errors), and
+`require('stereoLink/airplay/remote').stats()` for the phone remote.
+
 After changing UI files restart the game: reloading the UI in place is unreliable in 0.40.
 
-Want to add another way to connect a phone, Android in particular? Start with
-[docs/ADDING_A_SOURCE.md](docs/ADDING_A_SOURCE.md).
+### Release
 
-## What's next
+The zip holds exactly the files listed in `tools/release-files.txt`; `make pack` prints what it
+left out, and a pattern that matches nothing fails the build.
 
-1. Android, if enough people want it.
-2. The song on the car's own dashboard: older cars get a line of text with what is playing, cars
-   with screens get a real media display.
+Add a `## x.y.z` section to `CHANGELOG.md`, commit it on `main`, then
+`make release VERSION=x.y.z`. That sets the version in `info.json`, commits, tags `vx.y.z` and
+pushes; GitHub Actions builds the zip and publishes the release with the changelog section as its
+text. `x.y.z-beta.1` becomes a pre-release.
 
 ## Support
 
-StereoLink is free. If you like it, you can
-[buy me a beer 🍺](https://link.payoneer.com/Token?t=814942C193C2433E8EECA80E0735BECD&src=pl)
-(or a coffee). Any amount, no strings attached.
+If it is useful to you, you can
+[buy me a beer](https://link.payoneer.com/Token?t=814942C193C2433E8EECA80E0735BECD&src=pl).
 
 ## License
 

@@ -6,11 +6,11 @@
   mDNS query  ────▶ │ airplay/mdns   unicast answer│          │                           │
   RTSP (TCP)  ────▶ │ airplay/raop ──"challenge"───┼─────────▶│ crypto.js  RSA signature  │
                     │              ◀──uiReply──────┼──────────│                           │
-                    │              ──"stream"──────┼─────────▶│ crypto.js  AES key (OAEP) │
+                    │              ──"stream"──────┼─────────▶│ airplay.js AES key (OAEP) │
   RTP (UDP)   ────▶ │              ──"audio"───────┼─────────▶│ player.js  reorder, AES,  │
                     │                              │          │ alac.js    decode, Web    │
                     │ airplay/remote (DACP) ◀──────┼──────────│            Audio, effects │
-                    │ stereoLink.lua  state ──┼─────────▶│ headUnit.js  the screen   │
+                    │ stereoLink.lua  state ───────┼─────────▶│ headUnit.js  the screen   │
                     └──────────────────────────────┘          └───────────────────────────┘
 ```
 
